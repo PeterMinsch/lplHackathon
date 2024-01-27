@@ -1,9 +1,8 @@
-
 require("dotenv").config();
-const {
-  authenticateToken,
-  requireRole,
-} = require("./app/middleware/jwt-helpers.js");
+// const {
+//   authenticateToken,
+//   requireRole,
+// } = require("./app/middleware/jwt-helpers.js");
 const express = require("express");
 const cors = require("cors");
 const db = require("./app/models");
@@ -22,7 +21,7 @@ app.use(cors(corsOptions));
 
 //db.sequelize.sync({ force: true })
 db.sequelize
-  .sync()
+  .sync({ force: true })
   .then(() => {
     console.log("Synced db.");
   })
@@ -32,10 +31,10 @@ db.sequelize
 
 // Routes
 const AuthRoute = require("./app/routes/auth.routes.js");
-const StudentRoute = require("./app/routes/student.routes.js");
+const MessageRoute = require("./app/routes/messages.routes.js");
 
 app.use("/auth", AuthRoute);
-app.use("/student", StudentRoute);
+app.use("/messages", MessageRoute);
 
 // Error Handling
 app.use((req, res, next) => {
@@ -55,7 +54,7 @@ app.use((error, req, res, next) => {
 });
 
 // Start Server
-const PORT = 5000;
+const PORT = 5001;
 app.listen(PORT, () => {
   console.log(`Server has started on port ${PORT}`);
 });
