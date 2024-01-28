@@ -27,6 +27,8 @@ db.messages = require("./message.model.js")(sequelize, Sequelize);
 // DB Relationships
 
 //========================
+
+//User-Chatrooms One to Many relationship
 db.users.hasOne(db.chatrooms, {
   foreignKey: "UserID",
   onDelete: "CASCADE",
@@ -35,14 +37,15 @@ db.chatrooms.belongsTo(db.users, {
   foreignKey: "UserID",
 });
 
-//Tutors-Receipts: One to Many relationship
-
-db.users.hasOne(db.messages, {
+//User-Messages: One to Many relationship
+db.users.hasMany(db.messages, {
   foreignKey: "UserID",
   onDelete: "CASCADE",
 });
 db.messages.belongsTo(db.users, {
   foreignKey: "UserID",
 });
+
+//Chatrooms-User:
 
 module.exports = db;

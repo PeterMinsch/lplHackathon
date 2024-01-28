@@ -7,14 +7,6 @@ module.exports = (sequelize, Sequelize) => {
         autoIncrement: true,
         primaryKey: true,
       },
-      UserID: {
-        type: Sequelize.INTEGER,
-        allowNull: false,
-      },
-      ChatroomID: {
-        type: Sequelize.INTEGER,
-        allowNull: false,
-      },
       Content: {
         type: Sequelize.TEXT,
         allowNull: false,
@@ -30,17 +22,18 @@ module.exports = (sequelize, Sequelize) => {
           model: "Users",
           key: "UserID",
         },
+      },
 
-        ChatroomID: {
-          type: Sequelize.INTEGER,
-          allowNull: false,
-          references: {
-            model: "Chatrooms",
-            key: "ChatroomID",
-          },
+      ChatroomID: {
+        type: Sequelize.INTEGER,
+        allowNull: false,
+        references: {
+          model: "Chatrooms",
+          key: "ChatroomID",
         },
       },
     },
+
     { timestamps: false }
   );
 
