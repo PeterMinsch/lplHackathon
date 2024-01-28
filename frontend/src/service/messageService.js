@@ -1,7 +1,7 @@
 import axios from "axios";
 
 const messageAxios = axios.create({
-  baseURL: "http://localhost:5000/",
+  baseURL: "http://localhost:5001/",
   headers: {
     "Content-type": "application/json",
   },
@@ -10,15 +10,18 @@ const messageAxios = axios.create({
 
 async function sendMessage(body) {
   try {
-    const response = await messageAxios.get("/message/send", {
+    const response = await messageAxios.post("/messages/send", {
       UserID: body.UserID,
       message: body.message,
     });
+
+    // Return the relevant data from the response
+    return response.data;
   } catch (error) {
-    console.log(
-      "Error during sending message to API",
-      error.response.data.message
-    );
+    console.error("Error during sending message to API", error);
+
+    // Optionally throw an error or return a specific value
+    throw new Error("Failed to send message");
   }
 }
 
@@ -27,6 +30,7 @@ async function loadPrevMessages(body) {
     const response = await messageAxios.get("/auth/loadPrevMessages", {
       ChatroomID: body.ChatroomID,
     });
+    return response.data;
   } catch (error) {
     console.log(
       "Error during GET for prev messages: ",

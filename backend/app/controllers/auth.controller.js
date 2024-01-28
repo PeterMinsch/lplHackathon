@@ -36,30 +36,16 @@ exports.login = async (req, res) => {
       secure: false, //people browsing the site can see the cookie
       path: "/", //store at the root where the browser holds cookies
     });
-    if (user.Role == "Tutor") {
-      const tutor = await Tutor.findOne({ where: { UserID: user.UserID } });
-      if (!tutor) return res.status(400).send({ Message: "Tutor not found" });
-      res.status(200).send({
-        message: "Logged in successfull",
-        Tutor: tutor,
-        User: {
-          ID: user.UserID,
-          Email: user.Email,
-          FirstName: user.FirstName,
-          LastName: user.LastName,
-        },
-      });
-    } else {
-      res.status(200).send({
-        message: "Logged in successfully!",
-        User: {
-          ID: user.UserID,
-          Email: user.Email,
-          FirstName: user.FirstName,
-          LastName: user.LastName,
-        },
-      });
-    }
+
+    res.status(200).send({
+      message: "Logged in successfully!",
+      User: {
+        ID: user.UserID,
+        Email: user.Email,
+        FirstName: user.FirstName,
+        LastName: user.LastName,
+      },
+    });
   } catch (error) {
     console.error(error);
     res.status(500).send({ message: "Internal server error" });
