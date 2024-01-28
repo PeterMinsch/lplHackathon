@@ -114,30 +114,3 @@ export default function LandingPage() {
               required
               fullWidth
               id="message"
-              label="Type your message..."
-              name="message"
-              value={userInput}
-              onChange={handleInputChange}
-            />
-            <Button
-              type="submit"
-              variant="contained"
-              sx={{ backgroundColor: "#FF8C00", color: "#fff" }}
-              onClick={handleFormSubmit}
-            >
-              Send
-            </Button>
-          </Box>
-        </Box>
-        <Box mt={5}>
-          <Typography variant="body2" color="text.secondary" align="center">
-            {"By "}
-            <Link color="inherit" href="https://www.csusm.edu/index.html">
-              Vergil
-            </Link>
-          </Typography>
-        </Box>
-      </Container>
-    </ThemeProvider>
-  );
-}

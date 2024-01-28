@@ -11,6 +11,14 @@ module.exports = (sequelize, Sequelize) => {
         type: Sequelize.STRING(255),
         allowNull: false,
       },
+      UserID: {
+        type: Sequelize.INTEGER,
+        allowNull: false,
+        references: {
+          model: "Users",
+          key: "UserID",
+        },
+      },
     },
     { timestamps: false }
   );

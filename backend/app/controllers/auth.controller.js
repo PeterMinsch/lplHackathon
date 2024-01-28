@@ -1,6 +1,7 @@
 const db = require("../models");
 
 const User = db.users;
+const Chatroom = db.chatrooms;
 
 const jwt = require("jsonwebtoken");
 const bcrypt = require("bcrypt");
@@ -87,12 +88,19 @@ exports.createUser = async (req, res) => {
       LastName: req.body.LastName,
       Email: req.body.Email,
     });
+    console.log("User object:", user);
+
+    const chatroom = await Chatroom.create({
+      Name: "Title",
+      UserID: user.UserID,
+    });
     const userResponse = user.toJSON();
     delete userResponse.AuthenticationData;
     res
       .status(201)
       .send({ message: "User registered successfully!", user: userResponse });
   } catch (error) {
-    res.status(500).send({ message: error.message });
+    console.error(error);
+    res.status(500).send({ message: "Internal server error" });
   }
 };
