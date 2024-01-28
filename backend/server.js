@@ -21,7 +21,7 @@ app.use(cors(corsOptions));
 
 //db.sequelize.sync({ force: true })
 db.sequelize
-  .sync({ force: true })
+  .sync()
   .then(() => {
     console.log("Synced db.");
   })

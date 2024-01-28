@@ -37,6 +37,16 @@ db.chatrooms.belongsTo(db.users, {
   foreignKey: "UserID",
 });
 
+//Chatrooms-Messages: One to Many relationship
+db.messages.hasOne(db.chatrooms, {
+  foreignKey: "ChatroomID",
+  onDelete: "CASCADE",
+});
+
+db.chatrooms.belongsTo(db.messages, {
+  foreignKey: "ChatroomID",
+});
+
 //User-Messages: One to Many relationship
 db.users.hasMany(db.messages, {
   foreignKey: "UserID",
@@ -47,5 +57,15 @@ db.messages.belongsTo(db.users, {
 });
 
 //Chatrooms-User:
+db.users.hasMany(db.chatrooms, {
+  as: "ChatroomsUser",
+  foreignKey: "UserID",
+  onDelete: "CASCADE",
+});
+
+db.chatrooms.belongsTo(db.users, {
+  as: "UserChatrooms",
+  foreignKey: "UserID",
+});
 
 module.exports = db;

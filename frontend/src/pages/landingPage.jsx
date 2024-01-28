@@ -46,6 +46,7 @@ export default function LandingPage() {
               fullWidth
               id="message"
               label="Ask me anything..."
+              ou
               name="message"
               autoFocus
             />
